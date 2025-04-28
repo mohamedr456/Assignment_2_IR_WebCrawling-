@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public class WebCrawler {
     List<String> extractWikipediaLinks(String htmlContent) {
         List<String> wikipediaUrls = new ArrayList<>();
-        String regex = "href=\\\"(/wiki/[^\\\"]+)\\\"";
+        String regex = "href=\"(/wiki/[^\"]+)\"";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(htmlContent);
 
