@@ -65,7 +65,9 @@ public class InvertedIndex {
         }
     }
 
-    public Map<String, List<Posting>> getIndex() {
+    public Map<String, List<Posting>> getInvertedIndex() {
         return invertedIndex;
     }
+
+
 }

@@ -14,6 +14,19 @@ public class Main {
 
 //       uncomment law 3ayz t4of el inverted index 
 //        index.printIndex();
+        TFIDFCalculator calculator = new TFIDFCalculator(index, docs);
+        // you can use calculator.getTFIDFVector(docID) as bellow
+
+        // print TF-IDF vector for each document
+
+        for (Integer docId : docs.keySet()) {
+            System.out.println("TF-IDF vector for document " + docId + ":");
+            Map<String, Double> tfidfVector = calculator.getTFIDFVector(docId);
+            for (Map.Entry<String, Double> entry : tfidfVector.entrySet()) {
+                System.out.println("  Term: " + entry.getKey() + ", TF-IDF: " + entry.getValue());
+            }
+            System.out.println();
+        }
 
     }
 }
