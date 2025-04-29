@@ -8,6 +8,7 @@ public class TFIDFCalculator {
     private final Map<Integer, Map<String, Double>> docVectors = new HashMap<>();
     private final InvertedIndex invertedIndex;
     private final Map<Integer, String> docs;
+    Map<String, Double> idfScores = new HashMap<>();
 
     public TFIDFCalculator(InvertedIndex invertedIndex, Map<Integer, String> docs) {
         this.invertedIndex = invertedIndex;
@@ -18,7 +19,7 @@ public class TFIDFCalculator {
     private void computeTFIDFVectors() {
         int totalDocs = docs.size();
 
-        Map<String, Double> idfScores = new HashMap<>();
+        idfScores.clear();
         for (String term : invertedIndex.getInvertedIndex().keySet()) {
             int df = invertedIndex.getInvertedIndex().get(term).size();
             double idf = Math.log10((double) totalDocs / df);
@@ -58,4 +59,6 @@ public class TFIDFCalculator {
     public Map<Integer, Map<String, Double>> getDocVectors() {
         return docVectors;
     }
+
+    public Map<String, Double> getIdfScores() {return idfScores;}
 }
