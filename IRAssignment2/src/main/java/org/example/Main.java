@@ -1,8 +1,18 @@
 package org.example;
 
 import java.util.Map;
+import java.util.*;
 
 public class Main {
+
+    private static Map<String, Map<String, Double>> convertDocIdToString(Map<Integer, Map<String, Double>> intKeyMap) {
+        Map<String, Map<String, Double>> result = new HashMap<>();
+        for (Map.Entry<Integer, Map<String, Double>> entry : intKeyMap.entrySet()) {
+            result.put(String.valueOf(entry.getKey()), entry.getValue());
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         // Initialize WebCrawler and InvertedIndex
         WebCrawler crawler = new WebCrawler();
@@ -28,5 +38,24 @@ public class Main {
             System.out.println();
         }
 
+        //query processor
+        Map<String, Map<String, Double>> tfidfVectors = convertDocIdToString(calculator.getDocVectors());
+        Map<String, Double> idfValues = calculator.getIdfScores();
+
+        QueryProcessor queryProcessor = new QueryProcessor(tfidfVectors, idfValues);
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("please Enter your query: ");
+        String query = scanner.nextLine();
+
+        List<String> results = queryProcessor.search(query);
+
+        if (results.isEmpty()) {
+            System.out.println("No documents matched your query.");
+        } else {
+            System.out.println("Top matching documents:");
+            for (String doc : results) {
+                System.out.println(doc);
+            }
+        }
     }
 }
