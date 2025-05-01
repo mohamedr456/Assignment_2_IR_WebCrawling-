@@ -34,13 +34,13 @@ public class Main {
             printMenu();
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // consume newline
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
                     System.out.print("Enter number of documents to crawl: ");
                     int count = scanner.nextInt();
-                    scanner.nextLine(); // consume newline
+                    scanner.nextLine();
                     docs = crawler.crawl(count);
                     index.buildIndex(docs);
                     calculator = new TFIDFCalculator(index, docs);
