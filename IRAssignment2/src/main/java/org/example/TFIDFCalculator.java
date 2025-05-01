@@ -30,11 +30,9 @@ public class TFIDFCalculator {
             int docId = entry.getKey();
             Map<String, Double> tfidfVector = new HashMap<>();
 
-            // For each term that exists in the index
             for (String term : invertedIndex.getInvertedIndex().keySet()) {
                 List<Posting> postings = invertedIndex.getInvertedIndex().get(term);
 
-                // Find if this document contains this term
                 for (Posting posting : postings) {
                     if (posting.getDocID() == docId) {
                         int tf = posting.getTermFrequency();
@@ -42,7 +40,7 @@ public class TFIDFCalculator {
                         double idf = idfScores.get(term);
                         double tfidf = tfWeight * idf;
                         tfidfVector.put(term, tfidf);
-                        break; // found term for this document
+                        break;
                     }
                 }
             }
